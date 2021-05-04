@@ -6,7 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "personas")
 public class Persona {
 
-	//GENERA UN CARACTER ALFANUMERICO ALEATORIO
 	@Id
 	private String id;
 	
