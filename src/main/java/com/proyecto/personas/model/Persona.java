@@ -80,8 +80,5 @@ public class Persona {
 	}
 
 	
-	//int - no admite nulos porque es primitivo
-	//Integer- valor wrapper calse
-	//en no relacional no se crea los campos
-	
+
 }
