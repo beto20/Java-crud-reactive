@@ -1,6 +1,7 @@
 package com.proyecto.personas.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -105,8 +106,26 @@ public class PersonaController {
 						.contentType(MediaType.APPLICATION_JSON)
 						.body(pe))
 				.defaultIfEmpty(new ResponseEntity<Persona>(HttpStatus.NOT_FOUND));
-		
 	}
+	
+	@GetMapping("/filtrar")
+	public Flux<Persona> filtrado(){
+		
+		Flux<Persona> lista = service.listar();
+		
+		Flux<Persona> fxPersona = Flux.fromIterable(lista);
+
+	}
+	
+	/*
+	public void m8filter() {
+		Flux<String> fxPlatos = Flux.fromIterable(platos);
+		fxPlatos.filter(p -> {
+			return p.startsWith("P");
+		})
+		.subscribe(x -> log.info(x));
+	}
+	*/
 	
 	
 	
