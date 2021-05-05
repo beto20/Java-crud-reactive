@@ -10,12 +10,14 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException.NotFound;
 
 import com.proyecto.personas.model.Persona;
 import com.proyecto.personas.service.IPersonaService;
@@ -34,6 +36,8 @@ public class PersonaController {
 	@GetMapping
 	public Mono<ResponseEntity<Flux<Persona>>> listar(){
 		Flux<Persona> fluxPersona = service.listar();
+		
+		//fluxPersona.
 		
 		return Mono.just(ResponseEntity.ok()
 				.contentType(MediaType.APPLICATION_JSON)
@@ -84,13 +88,35 @@ public class PersonaController {
 				.defaultIfEmpty(ResponseEntity.notFound().build());
 	}
 	
+
 	
-	@DeleteMapping("/id")
+	@PatchMapping("eliminar/{id}")
+	public Mono<ResponseEntity<Persona>> eliminarLogico(@RequestBody Persona persona, @PathVariable("id") String id){
+		Mono<Persona> monoPersona = Mono.just(persona);
+		Mono<Persona> monoDB = service.listarPorId(id);
+		
+		return monoDB
+				.zipWith(monoPersona, (db, p) -> {
+					db.setEstado("Inactivo");
+					return db;
+				})
+				.flatMap(p -> service.modificar(p))
+				.map(pe -> ResponseEntity.ok()
+						.contentType(MediaType.APPLICATION_JSON)
+						.body(pe))
+				.defaultIfEmpty(new ResponseEntity<Persona>(HttpStatus.NOT_FOUND));
+		
+	}
+	
+	
+	
+	
+	@DeleteMapping("/{id}")
 	public Mono<ResponseEntity<Void>> eliminar(@PathVariable("id") String id){
 		return service.listarPorId(id)
 				.flatMap(p -> {
 					return service.eliminar(p.getId())
-							.then(Mono.just(new ResponseEntity<Void>(HttpStatus.NOT_FOUND)));
+							.then(Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)));
 				})
 				.defaultIfEmpty(new ResponseEntity<Void>(HttpStatus.NOT_FOUND));
 	}
