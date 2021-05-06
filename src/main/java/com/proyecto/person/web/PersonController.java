@@ -1,60 +1,57 @@
-package com.proyecto.personas.web;
+package com.proyecto.person.web;
 
-import java.net.URI;
-import java.util.List;
+import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException.NotFound;
 
-import com.proyecto.personas.business.IPersonaBusiness;
-import com.proyecto.personas.model.Persona;
+import com.proyecto.person.business.IPersonBusiness;
+import com.proyecto.person.model.Person;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
-@RequestMapping("/personas")
-public class PersonaController {
+@RequestMapping("/people")
+public class PersonController {
 
 	//@Autowired
-	private IPersonaBusiness business;
+	private IPersonBusiness business;
 	
-	public PersonaController( final IPersonaBusiness business) {
+	public PersonController( final IPersonBusiness business) {
 		this.business = business;
 	}
 
 	@GetMapping
-	public Mono<ResponseEntity<Flux<Persona>>> list(){
+	public Mono<ResponseEntity<Flux<Person>>> list(){
 		return business.list();	
 	}
 	
 	@PostMapping
-	public Mono<ResponseEntity<Persona>> insert(@RequestBody Persona persona, final ServerHttpRequest req){
-		return business.insert(persona, req);
+	public Mono<ResponseEntity<Person>> insert( @RequestBody Person person, final ServerHttpRequest req){
+		return business.insert(person, req);
 	}
 
 	@PutMapping("/{id}")
-	public Mono<ResponseEntity<Persona>> edit(@RequestBody Persona persona, @PathVariable("id") String id){
-		return business.edit(persona, id);		
+	public Mono<ResponseEntity<Person>> edit( @RequestBody Person person, @PathVariable("id") String id){
+		return business.edit(person, id);		
 	}
 	
 	@GetMapping("/{id}")
-	public Mono<ResponseEntity<Persona>> listById(@PathVariable("id") String id){
+	public Mono<ResponseEntity<Person>> listById( @PathVariable("id") String id){
 		return business.listById(id);
 	}
 	
@@ -76,7 +73,7 @@ public class PersonaController {
 				.defaultIfEmpty(new ResponseEntity<Persona>(HttpStatus.NOT_FOUND));
 	}
 	*/
-	
+	@ResponseStatus(code = HttpStatus.NO_CONTENT,reason = "NO HAY CONTENIDO")
 	@DeleteMapping("/{id}")
 	public Mono<ResponseEntity<Void>> eliminar(@PathVariable("id") String id){
 		return business.delete(id);
