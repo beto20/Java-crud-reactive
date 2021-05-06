@@ -1,8 +1,11 @@
 package com.proyecto.person.web;
 
+<<<<<<< HEAD:src/main/java/com/proyecto/person/web/PersonController.java
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+=======
+>>>>>>> 0960e85427dbd31ad804b96fcafc0765f981fdb4:src/main/java/com/proyecto/personas/web/PersonaController.java
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -41,17 +44,29 @@ public class PersonController {
 	}
 	
 	@PostMapping
+<<<<<<< HEAD:src/main/java/com/proyecto/person/web/PersonController.java
 	public Mono<ResponseEntity<Person>> insert( @RequestBody Person person, final ServerHttpRequest req){
+=======
+	public Mono<ResponseEntity<Person>> insert(@RequestBody Person person, final ServerHttpRequest req){
+>>>>>>> 0960e85427dbd31ad804b96fcafc0765f981fdb4:src/main/java/com/proyecto/personas/web/PersonaController.java
 		return business.insert(person, req);
 	}
 
 	@PutMapping("/{id}")
+<<<<<<< HEAD:src/main/java/com/proyecto/person/web/PersonController.java
 	public Mono<ResponseEntity<Person>> edit( @RequestBody Person person, @PathVariable("id") String id){
+=======
+	public Mono<ResponseEntity<Person>> edit(@RequestBody Person person, @PathVariable("id") String id){
+>>>>>>> 0960e85427dbd31ad804b96fcafc0765f981fdb4:src/main/java/com/proyecto/personas/web/PersonaController.java
 		return business.edit(person, id);		
 	}
 	
 	@GetMapping("/{id}")
+<<<<<<< HEAD:src/main/java/com/proyecto/person/web/PersonController.java
 	public Mono<ResponseEntity<Person>> listById( @PathVariable("id") String id){
+=======
+	public Mono<ResponseEntity<Person>> listById(@PathVariable("id") String id){
+>>>>>>> 0960e85427dbd31ad804b96fcafc0765f981fdb4:src/main/java/com/proyecto/personas/web/PersonaController.java
 		return business.listById(id);
 	}
 	

@@ -1,5 +1,6 @@
 package com.proyecto.person.model;
 
+<<<<<<< HEAD
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -7,6 +8,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "people")
+=======
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "personas")
+>>>>>>> 0960e85427dbd31ad804b96fcafc0765f981fdb4
 public class Person {
 
 	@Id
@@ -16,7 +23,10 @@ public class Person {
 	
 	private String lastname;
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 0960e85427dbd31ad804b96fcafc0765f981fdb4
 	private String dni;
 	
 	private String address;
