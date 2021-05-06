@@ -1,13 +1,13 @@
-package com.proyecto.personas;
+package com.proyecto.person;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PersonasCrud1Application {
+public class PersonCrud1Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PersonasCrud1Application.class, args);
+		SpringApplication.run(PersonCrud1Application.class, args);
 	}
 
 }
