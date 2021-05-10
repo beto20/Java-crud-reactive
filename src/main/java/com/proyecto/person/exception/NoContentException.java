@@ -1,17 +1,11 @@
 package com.proyecto.person.exception;
 
-public class NoContentException extends RuntimeException{
+import lombok.NoArgsConstructor;
 
-	public NoContentException() {
-		super();
-	}
+@NoArgsConstructor
+public class NoContentException extends RuntimeException {
 
-
-	public NoContentException(String message) {
-		super(message);
-	}
-
-
-	
-	
+    public NoContentException(String message) {
+        super(message);
+    }
 }

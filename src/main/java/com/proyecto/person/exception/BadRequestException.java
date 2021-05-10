@@ -1,12 +1,15 @@
 package com.proyecto.person.exception;
 
-public class BadRequestException extends RuntimeException {
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-	public BadRequestException() {
-	}
-	
-	public BadRequestException(String message) {
-		super(message);
-	}
-	
+@NoArgsConstructor
+
+public class BadRequestException extends RuntimeException{
+
+    public BadRequestException(String message) {
+        super(message);
+    }
+
+
 }
